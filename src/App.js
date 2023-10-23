@@ -1,13 +1,12 @@
+import * as THREE from 'three'
 import { useRef } from 'react'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { useGLTF, MeshTransmissionMaterial, ContactShadows, Environment } from '@react-three/drei'
 import { Stats, OrbitControls } from '@react-three/drei'
 import { useControls } from 'leva'
 
-const model = '/model.glb';
-let
-  config
-;
+const model = '/model.glb'
+let config
 
 export default function App() {
   return (
@@ -28,13 +27,21 @@ function Object(props) {
   const { scene, nodes, materials } = useGLTF(model)
 
   useFrame((state) => {
-    const t = state.clock.getElapsedTime();
+    const t = state.clock.getElapsedTime()
     ref.current.rotation.set(0, Math.PI / 4 + Math.sin(t / 20), 0)
     ref.current.position.y = (0.5 + Math.cos(t / 2)) / 7
   })
   return (
     <group ref={ref}>
-      <primitive object={scene} {...props} receiveShadow position={[0, 0, 0]} scale={[1, 1, 1]} children-0-castShadow rotation={[0, 0, 0]} />
+      <primitive
+        object={scene}
+        {...props}
+        receiveShadow
+        position={[0, 0, 0]}
+        scale={[1, 1, 1]}
+        children-0-castShadow
+        rotation={[0, 0, 0]}
+      />
     </group>
   )
 }
