@@ -39,7 +39,6 @@ function Object(props) {
         receiveShadow
         position={[0, 0, 0]}
         scale={[1, 1, 1]}
-        children-0-castShadow
         rotation={[0, 0, 0]}
       />
     </group>
