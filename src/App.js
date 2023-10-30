@@ -57,12 +57,26 @@ function Object(props) {
   const mLT = useControls('Lable Top Settings', optionsLables)
 
   const ref = useRef()
+  const refs = useRef()
   const { scene, nodes, materials } = useGLTF(model)
   mB.color = materials.StingrayPBS5.color
+  mB.normalMap = materials.StingrayPBS5.normalMap;
   mC.color = '#ffffff'
+  mC.metalness = 1;
+  mC.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
+  mC.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
   mLF.color = '#ffffff'
+  mLF.metalness = 1;
+  mLF.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
+  mLF.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
   mLB.color = '#ffffff'
+  mLB.metalness = 1;
+  mLB.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
+  mLB.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
   mLT.color = '#ffffff'
+  mLT.metalness = 1;
+  mLT.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
+  mLT.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     ref.current.rotation.set(0, Math.PI / 4 + Math.sin(t / 20), 0)
@@ -81,7 +95,7 @@ function Object(props) {
           <meshPhysicalMaterial {...mC} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} />
         </mesh>
         <mesh geometry={nodes.Etikett_EU_80.geometry} material-side={THREE.DoubleSide}>
-          <meshPhysicalMaterial {...mLF} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
+          <meshPhysicalMaterial ref={refs} {...mLF} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
         </mesh>
         <mesh geometry={nodes.Etikett_EU_81.geometry} material-side={THREE.DoubleSide}>
           <meshPhysicalMaterial {...mLB} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
