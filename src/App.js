@@ -3,7 +3,6 @@ import { useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import {
   useGLTF,
-  MeshTransmissionMaterial,
   AccumulativeShadows,
   RandomizedLight,
   ContactShadows,
@@ -12,10 +11,8 @@ import {
   OrbitControls
 } from '@react-three/drei'
 import { useControls } from 'leva'
-// import { pluginFile } from 'plugin-file';
 
 const model = '/model2.glb'
-let config
 
 export default function App() {
   return (
@@ -41,20 +38,6 @@ function Object(props) {
       thickness: { value: 0.0, min: 0, max: 10, step: 0.01 },
       ior: { value: 1.77, min: 1, max: 5, step: 0.01 },
       clearcoat: { value: 0.15, min: 0, max: 1 }
-      // meshPhysicalMaterial: true,
-      // transmissionSampler: false,
-      // backside: false,
-      // samples: { value: 10, min: 1, max: 32, step: 1 },
-      // resolution: { value: 2048, min: 256, max: 2048, step: 256 },
-      // chromaticAberration: { value: 0.06, min: 0, max: 1 },
-      // anisotropy: { value: 0.1, min: 0, max: 1, step: 0.01 },
-      // distortion: { value: 0.0, min: 0, max: 1, step: 0.01 },
-      // distortionScale: { value: 0.3, min: 0.01, max: 1, step: 0.01 },
-      // temporalDistortion: { value: 0.5, min: 0, max: 1, step: 0.01 },
-      // attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
-      // attenuationColor: '#ffffff',
-      // color: '#c9ffa1',
-      // bg: '#839681'
     }
   }, [])
 
@@ -74,7 +57,6 @@ function Object(props) {
   const mLT = useControls('Lable Top Settings', optionsLables)
 
   const ref = useRef()
-  const refs = useRef()
   const { scene, nodes, materials } = useGLTF(model)
   mB.color = materials.StingrayPBS5.color
   mC.color = '#ffffff'
