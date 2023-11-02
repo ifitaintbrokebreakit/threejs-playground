@@ -34,7 +34,7 @@ function Object(props) {
   const optionsBottle = useMemo(() => {
     return {
       transmission: { value: 1, min: 0, max: 1 },
-      roughness: { value: 0.0, min: 0, max: 1, step: 0.01 },
+      roughness: { value: 0.12, min: 0, max: 1, step: 0.01 },
       thickness: { value: 0.0, min: 0, max: 10, step: 0.01 },
       ior: { value: 1.77, min: 1, max: 5, step: 0.01 },
       clearcoat: { value: 0.15, min: 0, max: 1 }
@@ -57,14 +57,22 @@ function Object(props) {
   const mLT = useControls('Lable Top Settings', optionsLables)
 
   const ref = useRef()
-  const refs = useRef()
   const { scene, nodes, materials } = useGLTF(model)
+  const texture = new THREE.TextureLoader().load('map.jpeg' ); 
+  console.log(texture);
+  console.log(materials);
   mB.color = materials.StingrayPBS5.color
   mB.normalMap = materials.StingrayPBS5.normalMap;
   mC.color = '#ffffff'
   mC.metalness = 1;
   mC.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
   mC.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
+  // mLF.transparent = true;
+  // mLF.vertexColors = true
+  // mLF.depthTest = false
+  // mLF.depthWrite = false
+  // mLF.blending = THREE.NormalBlending,
+  // mLF.alphaMap = texture;
   mLF.color = '#ffffff'
   mLF.metalness = 1;
   mLF.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
@@ -73,6 +81,11 @@ function Object(props) {
   mLB.metalness = 1;
   mLB.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
   mLB.normalMap = materials.StingrayPBS_Etikett_Stoppel.normalMap;
+  mLB.transparent = true
+  // mLB.vertexColors = true
+  // mLB.depthTest = false
+  // mLB.depthWrite = false
+  // mLB.blending = THREE.NormalBlending,
   mLT.color = '#ffffff'
   mLT.metalness = 1;
   mLT.metalnessMap = materials.StingrayPBS_Etikett_Stoppel.metalnessMap;
@@ -95,7 +108,7 @@ function Object(props) {
           <meshPhysicalMaterial {...mC} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} />
         </mesh>
         <mesh geometry={nodes.Etikett_EU_80.geometry} material-side={THREE.DoubleSide}>
-          <meshPhysicalMaterial ref={refs} {...mLF} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
+          <meshPhysicalMaterial {...mLF} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
         </mesh>
         <mesh geometry={nodes.Etikett_EU_81.geometry} material-side={THREE.DoubleSide}>
           <meshPhysicalMaterial {...mLB} attachArray="material" map={materials.StingrayPBS_Etikett_Stoppel.map} side={2} />
